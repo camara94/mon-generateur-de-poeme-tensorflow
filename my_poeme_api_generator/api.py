@@ -10,3 +10,8 @@ from flask_cors import CORS
 from poeme_gen_model import *
 
 app = Flask(__name__)
+
+
+@app.route('/', methods=['GET'])
+def accueil():
+    return render_template("index.html")
