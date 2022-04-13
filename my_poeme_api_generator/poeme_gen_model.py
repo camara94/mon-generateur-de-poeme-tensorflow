@@ -68,3 +68,27 @@ def data_preprocessing(lien_fichier='./../data/poeme.txt', tokenizer=Tokenizer()
 
 
 tokenizer, max_sequence_len, token_list, xs, ys, word_index = data_preprocessing()
+
+
+def generer_poeme(seed_text, next_words=100, token_list=token_list, model=model, tokenizer=tokenizer, max_sequence_len=max_sequence_len):
+
+    for _ in range(next_words):
+        # Convert the text into sequences
+        token_list = tokenizer.texts_to_sequences([seed_text])[0]
+        # Pad the sequences
+        token_list = pad_sequences(
+            [token_list], maxlen=max_sequence_len-1, padding='pre')
+        # Get the probabilities of predicting a word
+        predicted = model.predict(token_list, verbose=0)
+        # Choose the next word based on the maximum probability
+        predicted = np.argmax(predicted, axis=-1).item()
+        # Get the actual word from the word index
+        output_word = tokenizer.index_word[predicted]
+        # Append to the current text
+        seed_text += " " + output_word
+
+    return seed_text
+
+
+def get_word_index():
+    return [{'name': word, 'weight': key} for word, key in dict(word_index).items()]
