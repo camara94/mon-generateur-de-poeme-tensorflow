@@ -15,3 +15,11 @@ app = Flask(__name__)
 @app.route('/', methods=['GET'])
 def accueil():
     return render_template("index.html")
+
+
+@app.route('/api/words', methods=['GET'])
+def word_indx():
+    return jsonify({
+        'status': 'ok',
+        'poeme': get_word_index()
+    })
