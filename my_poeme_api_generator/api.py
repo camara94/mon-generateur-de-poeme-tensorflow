@@ -36,3 +36,7 @@ def poeme():
         'status': 'ok',
         'poeme': response[len(request.json['tag'])+1:]
     })
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
