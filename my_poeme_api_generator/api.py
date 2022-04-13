@@ -23,3 +23,16 @@ def word_indx():
         'status': 'ok',
         'poeme': get_word_index()
     })
+
+
+@app.route('/api/poemes', methods=['POST'])
+def poeme():
+    if not request.json or not 'tag' in request.json:
+        abort(404)
+    else:
+        response = generer_poeme(request.json['tag'])
+
+    return jsonify({
+        'status': 'ok',
+        'poeme': response[len(request.json['tag'])+1:]
+    })
