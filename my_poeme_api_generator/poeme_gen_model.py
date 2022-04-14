@@ -1,4 +1,4 @@
-def charger_modele(lien_model="./../save_model/poeme_generator_74_37_pourcent.h5"):
+def charger_modele(lien_model="./../save_model/poeme_generator_90.61_pourcent.h5"):
 
     from tensorflow.keras.models import load_model
 
